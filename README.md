@@ -54,10 +54,10 @@ Aplikasi pembaca berita modern dan lengkap yang dibangun dengan Flutter, didukun
 
 4. **Update API key**
 
-   Ganti API key di file `APIKey.txt`:
+   Ganti API key di file `news_services.dart`:
 
    ```
-   YOUR_API_KEY_HERE
+   API_KEY
    ```
 
 5. **Jalankan aplikasi**
@@ -240,101 +240,3 @@ Proyek ini mendemonstrasikan praktik pengembangan Flutter yang canggih:
 - Dart SDK (3.0 atau lebih tinggi)
 - Android Studio / VS Code
 - Akun NewsAPI dan API key
-
-### Build untuk Produksi
-
-```bash
-# Build APK
-flutter build apk --release
-
-# Build App Bundle (direkomendasikan untuk Play Store)
-flutter build appbundle --release
-
-# Build untuk iOS
-flutter build ios --release
-```
-
-### Dependencies Utama
-
-```yaml
-dependencies:
-  flutter: sdk: flutter
-  provider: ^6.1.1          # Manajemen state
-  http: ^1.1.0              # Panggilan API
-  hive: ^2.2.3              # Database lokal
-  hive_flutter: ^1.1.0      # Integrasi Hive Flutter
-  cached_network_image: ^3.3.0  # Cache gambar
-  url_launcher: ^6.2.2      # Link eksternal
-  shimmer: ^3.0.0           # Animasi loading
-  intl: ^0.19.0             # Format tanggal
-  shared_preferences: ^2.2.2 # Penyimpanan pengaturan
-```
-
-## Deployment
-
-### Android
-
-1. Generate signed APK atau App Bundle
-2. Upload ke Google Play Console
-3. Konfigurasi metadata aplikasi dan screenshot
-
-### iOS
-
-1. Konfigurasi pengaturan proyek iOS
-2. Build dan archive di Xcode
-3. Upload ke App Store Connect
-
-## Lisensi
-
-Proyek ini dilisensikan di bawah MIT License - lihat file LICENSE untuk detail.
-
-## Kontribusi
-
-Kami menyambut kontribusi! Silakan ikuti langkah-langkah berikut:
-
-1. **Fork repository ini**
-2. **Buat feature branch**: `git checkout -b feature/nama-fitur-anda`
-3. **Buat perubahan Anda** dan pastikan mengikuti style kode yang ada
-4. **Test perubahan Anda** secara menyeluruh
-5. **Commit perubahan Anda**: `git commit -m 'Tambahkan fitur Anda'`
-6. **Push ke branch Anda**: `git push origin feature/nama-fitur-anda`
-7. **Buka Pull Request** dengan deskripsi yang jelas tentang perubahan Anda
-
-### Panduan Pengembangan
-
-- Ikuti panduan style Flutter/Dart
-- Tulis commit message yang bermakna
-- Tambahkan test untuk fitur baru
-- Update dokumentasi sesuai kebutuhan
-- Pastikan semua test yang ada berhasil
-
-## Dukungan & Feedback
-
-- **Issues**: Laporkan bug atau minta fitur melalui GitHub Issues
-- **Discussions**: Bergabung dalam diskusi komunitas untuk pertanyaan dan ide
-- **Email**: Hubungi kami untuk dukungan langsung
-
-## Roadmap
-
-### Fitur yang Akan Datang
-
-- [ ] Push notification untuk berita terkini
-- [ ] Membaca artikel offline
-- [ ] Fungsi berbagi artikel
-- [ ] Dukungan multi bahasa
-- [ ] Sumber berita kustom
-- [ ] Bookmark artikel dengan tag
-- [ ] Riwayat membaca dan analitik
-
-### Peningkatan Performa
-
-- [ ] Strategi caching yang canggih
-- [ ] Optimasi gambar
-- [ ] Lazy loading untuk daftar artikel besar
-- [ ] Sinkronisasi background untuk artikel tersimpan
-
----
-
-**Dibuat dengan Flutter**
-
-_Proyek ini menampilkan praktik pengembangan Flutter modern dan berfungsi sebagai contoh komprehensif untuk membangun aplikasi berita yang siap produksi._
