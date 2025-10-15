@@ -12,7 +12,7 @@ class NewsCardShimmer extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         border: Border(
           bottom: BorderSide(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -24,10 +24,10 @@ class NewsCardShimmer extends StatelessWidget {
           children: [
             // Image placeholder
             Shimmer.fromColors(
-              baseColor: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+              baseColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
               highlightColor: Theme.of(
                 context,
-              ).colorScheme.outline.withOpacity(0.1),
+              ).colorScheme.outline.withValues(alpha: 0.1),
               child: Container(
                 width: 100,
                 height: 100,
@@ -47,10 +47,10 @@ class NewsCardShimmer extends StatelessWidget {
                   Shimmer.fromColors(
                     baseColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.3),
+                    ).colorScheme.outline.withValues(alpha: 0.3),
                     highlightColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.1),
+                    ).colorScheme.outline.withValues(alpha: 0.1),
                     child: Container(
                       height: 16,
                       width: double.infinity,
@@ -64,10 +64,10 @@ class NewsCardShimmer extends StatelessWidget {
                   Shimmer.fromColors(
                     baseColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.3),
+                    ).colorScheme.outline.withValues(alpha: 0.3),
                     highlightColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.1),
+                    ).colorScheme.outline.withValues(alpha: 0.1),
                     child: Container(
                       height: 16,
                       width: 200,
@@ -82,10 +82,10 @@ class NewsCardShimmer extends StatelessWidget {
                   Shimmer.fromColors(
                     baseColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.3),
+                    ).colorScheme.outline.withValues(alpha: 0.3),
                     highlightColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.1),
+                    ).colorScheme.outline.withValues(alpha: 0.1),
                     child: Container(
                       height: 12,
                       width: double.infinity,
@@ -99,10 +99,10 @@ class NewsCardShimmer extends StatelessWidget {
                   Shimmer.fromColors(
                     baseColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.3),
+                    ).colorScheme.outline.withValues(alpha: 0.3),
                     highlightColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.1),
+                    ).colorScheme.outline.withValues(alpha: 0.1),
                     child: Container(
                       height: 12,
                       width: 150,
@@ -117,10 +117,10 @@ class NewsCardShimmer extends StatelessWidget {
                   Shimmer.fromColors(
                     baseColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.3),
+                    ).colorScheme.outline.withValues(alpha: 0.3),
                     highlightColor: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.1),
+                    ).colorScheme.outline.withValues(alpha: 0.1),
                     child: Container(
                       height: 10,
                       width: 80,
@@ -156,15 +156,15 @@ class LoadingList extends StatelessWidget {
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
             child: Shimmer.fromColors(
-              baseColor: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+              baseColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
               highlightColor: Theme.of(
                 context,
-              ).colorScheme.outline.withOpacity(0.1),
+              ).colorScheme.outline.withValues(alpha: 0.1),
               child: Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,

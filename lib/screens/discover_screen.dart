@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/news_provider.dart';
@@ -23,6 +24,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   bool _isLoading = false;
   String? _error;
   String _selectedCategory = 'all';
+  Timer? _debounceTimer;
 
   final List<String> _categories = [
     'all',
@@ -44,6 +46,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _debounceTimer?.cancel();
     super.dispose();
   }
 
@@ -74,13 +77,41 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   }
 
   void _onSearch(String query) {
+    // Cancel previous timer
+    _debounceTimer?.cancel();
+
     if (query.isEmpty) {
       _loadArticlesByCategory(_selectedCategory);
       return;
     }
 
-    final newsProvider = Provider.of<NewsProvider>(context, listen: false);
-    newsProvider.searchArticles(query);
+    // Set loading state
+    setState(() {
+      _isLoading = true;
+      _error = null;
+    });
+
+    // Debounce search - wait 1 second after user stops typing
+    _debounceTimer = Timer(const Duration(seconds: 1), () async {
+      try {
+        final newsProvider = Provider.of<NewsProvider>(context, listen: false);
+        await newsProvider.searchArticles(query);
+
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+            _articles = newsProvider.articles;
+          });
+        }
+      } catch (e) {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+            _error = e.toString();
+          });
+        }
+      }
+    });
   }
 
   @override
@@ -100,7 +131,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 10,
                   offset: const Offset(0, 2),
                 ),
@@ -113,13 +144,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 hintStyle: TextStyle(
                   color: Theme.of(
                     context,
-                  ).colorScheme.onSurface.withOpacity(0.6),
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
                 prefixIcon: Icon(
                   Icons.search,
                   color: Theme.of(
                     context,
-                  ).colorScheme.onSurface.withOpacity(0.6),
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -127,7 +158,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           Icons.clear,
                           color: Theme.of(
                             context,
-                          ).colorScheme.onSurface.withOpacity(0.6),
+                          ).colorScheme.onSurface.withValues(alpha: 0.6),
                         ),
                         onPressed: () {
                           _searchController.clear();
@@ -183,7 +214,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(
                     context,
-                  ).colorScheme.onSurface.withOpacity(0.7),
+                  ).colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -227,7 +258,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(
                                 context,
-                              ).colorScheme.outline.withOpacity(0.2),
+                              ).colorScheme.outline.withValues(alpha: 0.2),
                         width: 1.5,
                       ),
                       boxShadow: isSelected
@@ -235,14 +266,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               BoxShadow(
                                 color: Theme.of(
                                   context,
-                                ).colorScheme.primary.withOpacity(0.25),
+                                ).colorScheme.primary.withValues(alpha: 0.25),
                                 blurRadius: 6,
                                 offset: const Offset(0, 2),
                               ),
                             ]
                           : [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
+                                color: Colors.black.withValues(alpha: 0.05),
                                 blurRadius: 4,
                                 offset: const Offset(0, 1),
                               ),
@@ -284,16 +315,31 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     if (_error != null) {
       return custom.ErrorWidget(
         message: _error!,
-        onRetry: () => _loadArticlesByCategory(_selectedCategory),
+        onRetry: () {
+          if (_searchController.text.isNotEmpty) {
+            _onSearch(_searchController.text);
+          } else {
+            _loadArticlesByCategory(_selectedCategory);
+          }
+        },
       );
     }
 
     if (_articles.isEmpty) {
+      final isSearching = _searchController.text.isNotEmpty;
       return custom.EmptyStateWidget(
-        message: 'No articles found for $_selectedCategory',
+        message: isSearching
+            ? 'Tidak ada artikel ditemukan untuk "${_searchController.text}"'
+            : 'Tidak ada artikel ditemukan untuk $_selectedCategory',
         action: ElevatedButton(
-          onPressed: () => _loadArticlesByCategory(_selectedCategory),
-          child: const Text('Load Articles'),
+          onPressed: () {
+            if (isSearching) {
+              _onSearch(_searchController.text);
+            } else {
+              _loadArticlesByCategory(_selectedCategory);
+            }
+          },
+          child: Text(isSearching ? 'Cari Lagi' : 'Muat Artikel'),
         ),
       );
     }

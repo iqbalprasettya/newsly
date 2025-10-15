@@ -36,7 +36,7 @@ class NewsCard extends StatelessWidget {
                   bottom: BorderSide(
                     color: Theme.of(
                       context,
-                    ).colorScheme.outline.withOpacity(0.2),
+                    ).colorScheme.outline.withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),

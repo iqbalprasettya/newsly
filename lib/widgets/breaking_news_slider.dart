@@ -143,7 +143,7 @@ class _BreakingNewsSliderState extends State<BreakingNewsSlider> {
                                 end: Alignment.bottomCenter,
                                 colors: [
                                   Colors.transparent,
-                                  Colors.black.withOpacity(0.7),
+                                  Colors.black.withValues(alpha: 0.7),
                                 ],
                               ),
                             ),
@@ -171,7 +171,7 @@ class _BreakingNewsSliderState extends State<BreakingNewsSlider> {
                                           vertical: 2,
                                         ),
                                         decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.9),
+                                          color: Colors.white.withValues(alpha: 0.9),
                                           borderRadius: BorderRadius.circular(
                                             4,
                                           ),

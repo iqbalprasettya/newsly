@@ -92,12 +92,14 @@ class _SavedScreenState extends State<SavedScreen> {
                       if (confirmed == true) {
                         final savedProvider =
                             Provider.of<SavedArticlesProvider>(
+                              // ignore: use_build_context_synchronously
                               context,
                               listen: false,
                             );
                         await savedProvider.clearAllArticles();
 
                         if (mounted) {
+                          // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('All saved articles cleared'),
