@@ -1,6 +1,6 @@
-# Newsly - Aplikasi Berita Flutter Canggih
+# Newsly - Aplikasi Beritaa
 
-Aplikasi pembaca berita modern dan lengkap yang dibangun dengan Flutter, didukung oleh [NewsAPI.org](https://newsapi.org/). Nikmati berita terbaru dengan antarmuka yang indah, intuitif, dan fitur-fitur canggih.
+Aplikasi pembaca berita modern dan lengkap yang dibangun dengan Flutter, didukung oleh [NewsAPI.org](https://newsapi.org/). Nikmati berita terbaru dengan antarmuka yang indah, intuitif, dan fitur-fitur canggihhhh.
 
 ## Fitur Utama
 
